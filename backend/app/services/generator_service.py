@@ -4,10 +4,8 @@ Core CV generation service using Google Gemini AI
 
 import json
 import base64
-import asyncio
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from datetime import datetime
-import uuid
 from io import BytesIO
 
 import httpx
@@ -21,13 +19,12 @@ except ImportError:
     Document = None
 from jinja2 import Environment, FileSystemLoader
 try:
-    from weasyprint import HTML, CSS
+    from weasyprint import HTML
 except ImportError:
     HTML = None
-    CSS = None
 
 from app.core.config import settings
-from app.schemas.models import CVFormData, GeneratedCVResponse, PDFResponse
+from app.schemas.models import CVFormData, PDFResponse
 
 
 class CVGeneratorService:
@@ -199,8 +196,8 @@ Education: {[edu.model_dump() for edu in form_data.education]}
 Skills: {form_data.skills}
 Job Description: {form_data.job_description or "Not provided"}
 
-IMPORTANT COVER LETTER REQUIREMENTS:
-You are a professional cover letter generator for job applications. Generate a tailored cover letter for the specific job and candidate.
+DUBLIN COVER LETTER REQUIREMENTS:
+Generate a professional cover letter following Irish business communication standards for Dublin job market.
 
 Instructions:
 1. Read the provided job description and candidate's experience carefully
@@ -209,13 +206,19 @@ Instructions:
    - Write 3-4 professional paragraphs for the cover letter body only
    - DO NOT include salutation (Dear...) or closing (Sincerely...) in the cover_letter_body
    - Structure: Introduction → Body → Conclusion paragraphs
+   - Professional tone suitable for Irish business culture
 4. Content requirements:
-   - Introduction: State the position, express enthusiasm, strong opening
+   - Introduction: State the specific position, express genuine enthusiasm, strong opening
    - Body: Highlight relevant skills, experience, and achievements that match job requirements with specific examples and quantifiable results
    - Conclusion: Express interest in the role, company-specific motivation, request for interview
-5. Tone: Professional and positive, tailored to company culture
+5. Irish business etiquette:
+   - Professional and courteous tone
+   - Direct but respectful communication style
+   - Demonstrate knowledge of Irish business practices where relevant
+   - Mention Dublin location advantage if applicable
 6. Keep content concise but impactful (suitable for one page)
 7. Use specific examples from the candidate's experience that align with job requirements
+8. Include measurable achievements and results where possible
 
 Your task is to:
 1. Create a compelling professional summary (3-4 sentences)
@@ -269,7 +272,30 @@ Output ONLY valid JSON in this exact format:
         # Extract company name from job description if available
         company_info = self._extract_company_info(job_description)
         
-        return f"""You are an expert career coach specializing in ATS-friendly CVs for the Irish and European job markets.
+        return f"""You are an expert career coach specializing in ATS-friendly CVs for the Dublin/Irish job market following official Irish employment standards.
+
+Analyze the provided CV and job description. Rewrite and enhance the CV to perfectly align with the job requirements while maintaining truthfulness and meeting Dublin CV standards:
+
+DUBLIN CV REQUIREMENTS:
+- Length: 1-2 pages maximum (1 page for new graduates)
+- Format: Reverse chronological order (most recent first)
+- Font: Standard professional fonts only (Arial, Times New Roman, Calibri 11-12pt)
+- NO photos, colors, graphics, tables, or complex formatting
+- Include quantifiable achievements with specific metrics (percentages, amounts, numbers)
+- Use Irish phone format (+353) and Dublin address
+- Professional email address required
+- LinkedIn profile URL recommended
+- Each job description must include 3-4 bullet points with action verbs
+- Skills section organized by category (Technical, Soft, Languages)
+- Education section with degree, institution, dates, location
+- DO NOT include: birth date, marital status, nationality, references (unless requested)
+
+ATS OPTIMIZATION:
+- Use job description keywords naturally throughout CV
+- Simple bullet points with strong action verbs
+- Clear section headings in bold
+- No headers/footers that ATS cannot read
+- Standard section names: Professional Summary, Work Experience, Education, Skills
 
 Analyze the provided CV and job description. Rewrite and enhance the CV to perfectly align with the job requirements while maintaining truthfulness.
 
@@ -279,8 +305,8 @@ CURRENT CV:
 TARGET JOB DESCRIPTION:
 {job_description}
 
-IMPORTANT COVER LETTER REQUIREMENTS:
-You are a professional cover letter generator for job applications. Generate a tailored cover letter for the specific job and candidate.
+DUBLIN COVER LETTER REQUIREMENTS:
+Generate a professional cover letter following Irish business communication standards for Dublin job market.
 
 Instructions:
 1. Read the provided job description and candidate's CV carefully
@@ -289,13 +315,19 @@ Instructions:
    - Write 3-4 professional paragraphs for the cover letter body only
    - DO NOT include salutation (Dear...) or closing (Sincerely...) in the cover_letter_body
    - Structure: Introduction → Body → Conclusion paragraphs
+   - Professional tone suitable for Irish business culture
 4. Content requirements:
-   - Introduction: State the position, express enthusiasm, strong opening
+   - Introduction: State the specific position, express genuine enthusiasm, strong opening
    - Body: Highlight relevant skills, experience, and achievements that match job requirements with specific examples and quantifiable results
    - Conclusion: Express interest in the role, company-specific motivation, request for interview
-5. Tone: Professional and positive, tailored to company culture
+5. Irish business etiquette:
+   - Professional and courteous tone
+   - Direct but respectful communication style
+   - Demonstrate knowledge of Irish business practices where relevant
+   - Mention Dublin location advantage if applicable
 6. Keep content concise but impactful (suitable for one page)
 7. Use specific examples from the candidate's experience that align with job requirements
+8. Include measurable achievements and results where possible
 
 Your task is to:
 1. Extract and enhance personal details

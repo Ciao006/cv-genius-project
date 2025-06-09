@@ -14,7 +14,7 @@
         }
         
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: Arial, 'Times New Roman', sans-serif;
             line-height: 1.6;
             color: #2d3748;
             font-size: 11pt;
@@ -187,22 +187,22 @@
             <h1 class="name">{{ personal_details.full_name }}</h1>
             <div class="contact-info">
                 <div class="contact-item">
-                    <span>📧</span>
+                    <span>Email:</span>
                     <span>{{ personal_details.email }}</span>
                 </div>
                 <div class="contact-item">
-                    <span>📱</span>
+                    <span>Phone:</span>
                     <span>{{ personal_details.phone }}</span>
                 </div>
                 {% if personal_details.location %}
                 <div class="contact-item">
-                    <span>📍</span>
+                    <span>Location:</span>
                     <span>{{ personal_details.location }}</span>
                 </div>
                 {% endif %}
                 {% if personal_details.linkedin_url %}
                 <div class="contact-item">
-                    <span>💼</span>
+                    <span>LinkedIn:</span>
                     <span>{{ personal_details.linkedin_url }}</span>
                 </div>
                 {% endif %}
