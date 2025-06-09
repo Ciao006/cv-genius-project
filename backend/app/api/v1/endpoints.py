@@ -200,9 +200,27 @@ async def generate_cover_letter_pdf(
     try:
         import base64
         from datetime import datetime
+        from jinja2 import Environment, FileSystemLoader
+        from weasyprint import HTML
         
-        # Generate cover letter PDF using the service
-        cv_pdf, cover_letter_pdf = await cv_service._generate_pdfs(cover_letter_data)
+        # Initialize Jinja2 environment for this endpoint
+        jinja_env = Environment(
+            loader=FileSystemLoader('app/templates'),
+            autoescape=True
+        )
+        
+        # Load cover letter template
+        letter_template = jinja_env.get_template('letter_template.html')
+        
+        # Prepare template data with current date
+        template_data = cover_letter_data.copy()
+        template_data['generation_date'] = datetime.now().strftime("%B %d, %Y")
+        
+        # Render HTML
+        letter_html = letter_template.render(**template_data)
+        
+        # Generate PDF
+        cover_letter_pdf = HTML(string=letter_html).write_pdf()
         
         return {
             "cover_letter_pdf_base64": base64.b64encode(cover_letter_pdf).decode(),

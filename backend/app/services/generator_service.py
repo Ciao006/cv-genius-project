@@ -199,6 +199,8 @@ Job Description: {form_data.job_description or "Not provided"}
 DUBLIN COVER LETTER REQUIREMENTS:
 Generate a professional cover letter following Irish business communication standards for Dublin job market.
 
+IMPORTANT: Write everything in perfect English only. Do not use any other languages.
+
 Instructions:
 1. Read the provided job description and candidate's experience carefully
 2. Extract company name from job description if available
@@ -219,6 +221,7 @@ Instructions:
 6. Keep content concise but impactful (suitable for one page)
 7. Use specific examples from the candidate's experience that align with job requirements
 8. Include measurable achievements and results where possible
+9. IMPORTANT: Do not include ANY placeholder text in square brackets like [Platform where you saw the advert] or similar placeholders
 
 Your task is to:
 1. Create a compelling professional summary (3-4 sentences)
@@ -308,6 +311,8 @@ TARGET JOB DESCRIPTION:
 DUBLIN COVER LETTER REQUIREMENTS:
 Generate a professional cover letter following Irish business communication standards for Dublin job market.
 
+IMPORTANT: Write everything in perfect English only. Do not use any other languages.
+
 Instructions:
 1. Read the provided job description and candidate's CV carefully
 2. Extract company name from job description if available
@@ -328,6 +333,7 @@ Instructions:
 6. Keep content concise but impactful (suitable for one page)
 7. Use specific examples from the candidate's experience that align with job requirements
 8. Include measurable achievements and results where possible
+9. IMPORTANT: Do not include ANY placeholder text in square brackets like [Platform where you saw the advert] or similar placeholders
 
 Your task is to:
 1. Extract and enhance personal details

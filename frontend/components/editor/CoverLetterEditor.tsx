@@ -39,6 +39,7 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
     company_address: ''
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [showEditPrompt, setShowEditPrompt] = useState(false);
 
   useEffect(() => {
     setEditableData(initialData);
@@ -75,6 +76,13 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
     }
   };
 
+  const handlePreviewClick = () => {
+    if (!isEditing) {
+      setShowEditPrompt(true);
+      setTimeout(() => setShowEditPrompt(false), 2000);
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <div className="flex justify-between items-center mb-6">
@@ -92,7 +100,7 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
           <Button
             variant="outline"
             onClick={() => setIsEditing(!isEditing)}
-            className={isEditing ? 'bg-blue-50 border-blue-300' : ''}
+            className={`${isEditing ? 'bg-blue-50 border-blue-300' : ''} ${showEditPrompt ? 'animate-pulse bg-yellow-50 border-yellow-300' : ''}`}
           >
             {isEditing ? 'Preview Mode' : 'Edit Mode'}
           </Button>
@@ -121,7 +129,7 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="p-2 bg-white rounded border">{editableData.personal_details.full_name}</p>
+                  <p className="p-2 bg-white rounded border cursor-pointer hover:bg-gray-50" onClick={handlePreviewClick}>{editableData.personal_details.full_name}</p>
                 )}
               </div>
               
@@ -268,7 +276,7 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
                 placeholder="Enter your cover letter content here..."
               />
             ) : (
-              <div className="p-3 bg-gray-50 rounded border min-h-[300px]">
+              <div className="p-3 bg-gray-50 rounded border min-h-[300px] cursor-pointer hover:bg-gray-100" onClick={handlePreviewClick}>
                 <div className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
                   {editableData.cover_letter_body}
                 </div>
@@ -305,11 +313,11 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
                 {editableData.personal_details.full_name}
               </div>
               <div className="text-gray-600 text-sm space-y-1">
-                <div>{editableData.personal_details.email}</div>
+                <div className="break-all">{editableData.personal_details.email}</div>
                 <div>{editableData.personal_details.phone}</div>
                 <div>{editableData.personal_details.location}</div>
                 {editableData.personal_details.linkedin_url && (
-                  <div>{editableData.personal_details.linkedin_url}</div>
+                  <div className="break-all">{editableData.personal_details.linkedin_url}</div>
                 )}
               </div>
               
@@ -322,10 +330,8 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
             <div className="mb-6 text-gray-700 text-sm">
               <div>Hiring Manager</div>
               <div>{editableData.company_name}</div>
-              {editableData.include_company_address && editableData.company_address ? (
+              {editableData.include_company_address && editableData.company_address && (
                 <div className="whitespace-pre-wrap">{editableData.company_address}</div>
-              ) : (
-                <div>[Company Address]</div>
               )}
             </div>
 
