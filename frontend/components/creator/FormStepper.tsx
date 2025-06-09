@@ -21,15 +21,15 @@ const FormStepper: React.FC<FormStepperProps> = ({
 }) => {
   return (
     <div className="mb-8">
-      <nav aria-label="Progress">
-        <ol className="flex items-center">
+      <nav aria-label="Progress" className="overflow-x-auto">
+        <ol className="flex items-center justify-center min-w-max px-4 sm:px-0">
           {steps.map((step, index) => {
             const isCompleted = completedSteps.includes(step.id);
             const isCurrent = currentStep === step.id;
             const isLast = index === steps.length - 1;
             
             return (
-              <li key={step.id} className={clsx('relative', !isLast && 'pr-8 sm:pr-20')}>
+              <li key={step.id} className={clsx('relative flex-shrink-0', !isLast && 'pr-6 sm:pr-16 md:pr-20')}>
                 {/* Connector line */}
                 {!isLast && (
                   <div
@@ -51,7 +51,7 @@ const FormStepper: React.FC<FormStepperProps> = ({
                 <div className="relative flex items-center justify-center">
                   <div
                     className={clsx(
-                      'flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium',
+                      'flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full text-xs sm:text-sm font-medium flex-shrink-0',
                       isCompleted
                         ? 'bg-primary-600 text-white'
                         : isCurrent
@@ -60,23 +60,23 @@ const FormStepper: React.FC<FormStepperProps> = ({
                     )}
                   >
                     {isCompleted ? (
-                      <Check className="h-4 w-4" />
+                      <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                     ) : (
                       <span>{step.id}</span>
                     )}
                   </div>
                   
-                  {/* Step title */}
-                  <div className="ml-3 hidden sm:block">
+                  {/* Step title - hidden on mobile, shown on larger screens */}
+                  <div className="ml-3 hidden md:block min-w-0">
                     <p
                       className={clsx(
-                        'text-sm font-medium',
+                        'text-sm font-medium truncate',
                         isCurrent ? 'text-primary-600' : 'text-gray-500'
                       )}
                     >
                       {step.title}
                     </p>
-                    <p className="text-xs text-gray-400">{step.description}</p>
+                    <p className="text-xs text-gray-400 truncate">{step.description}</p>
                   </div>
                 </div>
               </li>
@@ -85,8 +85,8 @@ const FormStepper: React.FC<FormStepperProps> = ({
         </ol>
       </nav>
       
-      {/* Mobile step title */}
-      <div className="mt-4 sm:hidden">
+      {/* Mobile step title - centered */}
+      <div className="mt-4 md:hidden text-center">
         <p className="text-sm font-medium text-primary-600">
           Step {currentStep}: {steps.find(s => s.id === currentStep)?.title}
         </p>

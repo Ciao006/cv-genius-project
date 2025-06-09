@@ -180,3 +180,49 @@ body {
 .touch-target {
   @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
 }
+
+/* Icon overflow fixes */
+.icon-container {
+  @apply flex items-center justify-center flex-shrink-0;
+}
+
+/* Prevent icons from breaking layout */
+svg {
+  flex-shrink: 0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Specific fixes for mobile overflow issues */
+@media (max-width: 640px) {
+  /* Ensure content doesn't overflow container */
+  .mobile-safe-text {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.4;
+  }
+  
+  /* Icon sizing consistency on mobile */
+  .lucide {
+    flex-shrink: 0;
+  }
+  
+  /* Container overflow prevention */
+  .container-safe {
+    overflow-x: hidden;
+    word-wrap: break-word;
+  }
+  
+  /* Button content alignment */
+  .btn-mobile {
+    @apply flex items-center justify-center text-center;
+    min-height: 44px;
+  }
+  
+  /* Proper spacing for mobile cards */
+  .card-mobile {
+    @apply mx-auto max-w-full;
+    word-wrap: break-word;
+  }
+}

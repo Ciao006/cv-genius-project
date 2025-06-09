@@ -197,7 +197,7 @@ const UpdateCVPage: React.FC = () => {
                       
                       <div className="mb-4">
                         <p className="text-sm sm:text-base text-emerald-700 mb-2">
-                          Paste the job description you're applying for <span className="text-red-500">*</span>
+                          Paste the job description you&apos;re applying for <span className="text-red-500">*</span>
                         </p>
                         
                         <Textarea

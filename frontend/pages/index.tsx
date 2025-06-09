@@ -237,7 +237,7 @@ const HomePage: React.FC = () => {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">📝 Provide Details</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Share your experience, skills, and the job description you're targeting. 
+                  Share your experience, skills, and the job description you&apos;re targeting. 
                   Our AI analyzes everything to create the perfect match.
                 </p>
               </div>
