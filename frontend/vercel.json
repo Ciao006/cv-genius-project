@@ -2,11 +2,11 @@
   "name": "cvgenius",
   "version": 2,
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-449239631634.europe-west1.run.app"
+    "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-2fm63lpf4q-ew.a.run.app"
   },
   "build": {
     "env": {
-      "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-449239631634.europe-west1.run.app"
+      "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-2fm63lpf4q-ew.a.run.app"
     }
   },
   "functions": {

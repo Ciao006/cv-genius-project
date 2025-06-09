@@ -15,6 +15,7 @@ import Button from '@/components/ui/Button';
 
 import { cvAPI, downloadPDF, getErrorMessage } from '@/utils/api';
 import { PersonalDetails, WorkExperience, Education, CVFormData, PDFResponse } from '@/types';
+import safeStorage from '@/utils/storage';
 
 const steps = [
   { id: 1, title: 'Personal Info', description: 'Contact details' },
@@ -89,12 +90,26 @@ const CreateNewCVPage: React.FC = () => {
         coverLetterPdf: response.cover_letter_pdf_base64,
         filenameCV: response.filename_cv,
         filenameCoverLetter: response.filename_cover_letter,
-        cvData: response.cv_data || formData // Use AI-parsed data if available, fallback to form data
+        cvData: response.cv_data || {
+          personal_details: formData.personal_details,
+          professional_summary: '',
+          work_experience: formData.work_experience,
+          education: formData.education,
+          skills: { technical: [], soft: [], languages: [] },
+          cover_letter_body: '',
+          company_name: '[Company Name]',
+          job_title: 'the position'
+        }
       };
       
-      sessionStorage.setItem('cvResults', JSON.stringify(resultsData));
-      router.push('/results');
-      toast.success('CV generated successfully!');
+      const stored = safeStorage.setItem('cvResults', resultsData);
+      
+      if (stored) {
+        router.push('/results');
+        toast.success('CV generated successfully!');
+      } else {
+        toast.error('Error processing results. Please try again.');
+      }
     } catch (error) {
       const message = getErrorMessage(error);
       toast.error(message);

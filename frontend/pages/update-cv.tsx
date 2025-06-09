@@ -11,6 +11,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import FileUpload from '@/components/updater/FileUpload';
 import { cvAPI, downloadPDF, getErrorMessage } from '@/utils/api';
 import { PDFResponse } from '@/types';
+import safeStorage from '@/utils/storage';
 
 const UpdateCVPage: React.FC = () => {
   const router = useRouter();
@@ -56,14 +57,31 @@ const UpdateCVPage: React.FC = () => {
         filenameCV: response.filename_cv,
         filenameCoverLetter: response.filename_cover_letter,
         cvData: response.cv_data || {
-          job_description: jobDescription,
-          // Fallback data structure if cv_data not available
+          personal_details: {
+            full_name: '',
+            email: '',
+            phone: '',
+            location: ''
+          },
+          professional_summary: '',
+          work_experience: [],
+          education: [],
+          skills: { technical: [], soft: [], languages: [] },
+          cover_letter_body: '',
+          company_name: '[Company Name]',
+          job_title: 'the position',
+          job_description: jobDescription
         }
       };
       
-      sessionStorage.setItem('cvResults', JSON.stringify(resultsData));
-      router.push('/results');
-      toast.success('CV optimized successfully!');
+      const stored = safeStorage.setItem('cvResults', resultsData);
+      
+      if (stored) {
+        router.push('/results');
+        toast.success('CV optimized successfully!');
+      } else {
+        toast.error('Error processing results. Please try again.');
+      }
     } catch (error) {
       const message = getErrorMessage(error);
       toast.error(message);

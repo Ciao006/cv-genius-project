@@ -6,6 +6,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import CoverLetterEditor from '@/components/editor/CoverLetterEditor';
 import type { CoverLetterData } from '@/components/editor/CoverLetterEditor';
 import { downloadPDF, cvAPI } from '@/utils/api';
+import safeStorage from '@/utils/storage';
 
 interface CVData {
   personal_details: {
@@ -59,10 +60,11 @@ const ResultsPage = () => {
   const [isRegenerating, setIsRegenerating] = useState(false);
 
   useEffect(() => {
-    // Get data from session storage or URL params
-    const data = sessionStorage.getItem('cvResults');
-    if (data) {
-      setResultsData(JSON.parse(data));
+    // Get data from session storage using safe storage utility
+    const parsedData = safeStorage.getItem<ResultsData>('cvResults');
+    
+    if (parsedData) {
+      setResultsData(parsedData);
     } else {
       // Redirect back if no data
       router.push('/');
@@ -152,7 +154,7 @@ const ResultsPage = () => {
   };
 
   const handleStartOver = () => {
-    sessionStorage.removeItem('cvResults');
+    safeStorage.removeItem('cvResults');
     router.push('/');
   };
 
