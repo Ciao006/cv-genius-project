@@ -72,6 +72,16 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const currentError = error || dragError;
 
+  // Truncate filename for mobile display
+  const truncateFileName = (fileName: string, maxLength: number = 25) => {
+    if (fileName.length <= maxLength) return fileName;
+    
+    const extension = fileName.split('.').pop();
+    const nameWithoutExt = fileName.slice(0, fileName.lastIndexOf('.'));
+    const truncatedName = nameWithoutExt.slice(0, maxLength - extension!.length - 3);
+    return `${truncatedName}...${extension}`;
+  };
+
   return (
     <div className="w-full">
       {!selectedFile ? (
@@ -91,11 +101,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
               isDragActive ? 'text-primary-500' : 'text-gray-400'
             )} />
             
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <h3 className="text-lg font-medium text-gray-900 mb-2 text-center">
               {isDragActive ? 'Drop your CV here' : 'Upload your existing CV'}
             </h3>
             
-            <p className="text-sm text-gray-600 mb-4 text-center">
+            <p className="text-sm text-gray-600 mb-4 text-center px-2">
               Drag and drop your CV file here, or click to browse
             </p>
             
@@ -106,24 +116,28 @@ const FileUpload: React.FC<FileUploadProps> = ({
           </div>
         </div>
       ) : (
-        <div className="card p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <File className="w-8 h-8 text-primary-600 mr-3" />
-              <div>
-                <p className="font-medium text-gray-900">{selectedFile.name}</p>
-                <p className="text-sm text-gray-500">{formatFileSize(selectedFile.size)}</p>
+        <div className="card p-3 sm:p-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center min-w-0 flex-1">
+              <File className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 mr-2 sm:mr-3 flex-shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="font-medium text-gray-900 text-sm sm:text-base truncate" title={selectedFile.name}>
+                  <span className="hidden sm:inline">{selectedFile.name}</span>
+                  <span className="sm:hidden">{truncateFileName(selectedFile.name)}</span>
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500">{formatFileSize(selectedFile.size)}</p>
               </div>
             </div>
             
-            <div className="flex items-center">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+            <div className="flex items-center flex-shrink-0">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2" />
               <button
                 onClick={removeFile}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 sm:p-1 hover:bg-gray-100 rounded-full transition-colors touch-manipulation min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center"
                 type="button"
+                aria-label="Remove file"
               >
-                <X className="w-4 h-4 text-gray-500" />
+                <X className="w-5 h-5 sm:w-4 sm:h-4 text-gray-500" />
               </button>
             </div>
           </div>
@@ -131,8 +145,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
       )}
       
       {currentError && (
-        <div className="mt-3 flex items-center text-red-600">
-          <AlertCircle className="w-4 h-4 mr-2" />
+        <div className="mt-3 flex items-start text-red-600">
+          <AlertCircle className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
           <span className="text-sm">{currentError}</span>
         </div>
       )}

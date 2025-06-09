@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ArrowLeft, Download, FileText, Mail } from 'lucide-react';
+import { ArrowLeft, Download, FileText, Mail, AlertCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import clsx from 'clsx';
 
 import Button from '@/components/ui/Button';
 import Textarea from '@/components/ui/Textarea';
@@ -170,12 +171,12 @@ const UpdateCVPage: React.FC = () => {
                   </h2>
                   <p className="text-gray-600 mt-2">Two simple steps to transform your CV</p>
                 </div>
-                <form onSubmit={handleSubmit} className="p-8 space-y-10">
+                <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8 sm:space-y-10">
                   {/* File Upload Section */}
                   <div className="relative">
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200/50">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 sm:p-6 border border-blue-200/50">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
                         Upload Your CV
                       </h3>
                       <FileUpload
@@ -188,33 +189,54 @@ const UpdateCVPage: React.FC = () => {
 
                   {/* Job Description Section */}
                   <div className="relative">
-                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-200/50">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">2</span>
+                    <div className="bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-2xl p-4 sm:p-6 border border-emerald-200/50">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-full w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-sm font-bold mr-3">2</span>
                         Job Description
                       </h3>
-                      <Textarea
-                        label="Paste the job description you're applying for"
-                        placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
-                        value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
-                        error={errors.jobDescription}
-                        rows={8}
-                        required
-                        helpText="The more detailed the job description, the better we can optimize your CV"
-                      />
+                      
+                      <div className="mb-4">
+                        <p className="text-sm sm:text-base text-emerald-700 mb-2">
+                          Paste the job description you're applying for <span className="text-red-500">*</span>
+                        </p>
+                        
+                        <Textarea
+                          value={jobDescription}
+                          onChange={(e) => setJobDescription(e.target.value)}
+                          placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
+                          className={clsx(
+                            'w-full min-h-[150px] sm:min-h-[200px] p-3 sm:p-4 border rounded-lg resize-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200',
+                            errors.jobDescription ? 'border-red-500 bg-red-50' : 'border-gray-300 bg-white'
+                          )}
+                          rows={8}
+                        />
+                        
+                        {errors.jobDescription && (
+                          <p className="text-red-500 text-sm mt-2 flex items-start">
+                            <AlertCircle className="w-4 h-4 mr-1 mt-0.5 flex-shrink-0" />
+                            {errors.jobDescription}
+                          </p>
+                        )}
+                        
+                        <div className="mt-2 text-xs sm:text-sm text-emerald-600">
+                          <p>💡 The more detailed the job description, the better we can optimize your CV</p>
+                          <p className="text-gray-500 mt-1">
+                            Current length: {jobDescription.length} characters 
+                            {jobDescription.length < 50 && ' (minimum 50 characters required)'}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="flex justify-center pt-8">
-                    <div className="text-center">
+                  <div className="flex justify-center pt-6 sm:pt-8">
+                    <div className="text-center w-full max-w-sm">
                       <Button
                         type="submit"
                         size="lg"
                         loading={loading}
                         disabled={loading || !selectedFile || !jobDescription.trim()}
-                        className="px-16 py-4 text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
+                        className="w-full px-8 sm:px-16 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
                       >
                         {loading ? '⚙️ Optimizing Your CV...' : '🚀 Optimize My CV'}
                       </Button>
@@ -228,10 +250,10 @@ const UpdateCVPage: React.FC = () => {
 
               {/* Loading State */}
               {loading && (
-                <div className="mt-12 text-center">
+                <div className="mt-8 sm:mt-12 text-center">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-blue-400/20 rounded-3xl animate-pulse"></div>
-                    <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-10 border border-white/30 shadow-2xl">
+                    <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 sm:p-10 border border-white/30 shadow-2xl">
                       <LoadingSpinner size="lg" message="Our AI is analyzing your CV and optimizing it for the job..." />
                       <div className="mt-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl p-4 border border-emerald-200/50">
                         <p className="text-sm text-emerald-700 font-medium">

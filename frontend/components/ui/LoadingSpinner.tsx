@@ -24,7 +24,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     <div className={clsx('flex flex-col items-center justify-center', className)}>
       <Loader2 className={clsx('animate-spin text-primary-600', sizes[size])} />
       {message && (
-        <p className="mt-2 text-sm text-gray-600 animate-pulse">
+        <p className="mt-2 text-sm sm:text-base text-gray-600 animate-pulse text-center px-4">
           {message}
         </p>
       )}

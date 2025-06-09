@@ -44,7 +44,7 @@ export const ENVIRONMENT = {
 
 // URLs
 export const URLS = {
-  PRODUCTION_API: 'https://cvgenius-backend-2fm63lpf4q-ew.a.run.app',
+  PRODUCTION_API: 'https://cvgenius-backend-449239631634.europe-west1.run.app',
   DEVELOPMENT_API: 'http://localhost:8000',
   WEBSITE: 'https://cvgenius-nine.vercel.app',
 } as const; 

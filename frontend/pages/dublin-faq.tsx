@@ -546,20 +546,20 @@ const DublinFAQPage: React.FC = () => {
         {/* Hero Section */}
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center mb-6">
-              <div className="relative">
-                <Globe className="w-16 h-16 text-primary-600 mr-6 animate-pulse" />
+            <div className="flex flex-col md:flex-row items-center justify-center mb-6">
+              <div className="relative mb-4 md:mb-0 md:mr-6 flex-shrink-0">
+                <Globe className="w-16 h-16 text-primary-600 animate-pulse" />
                 <div className="absolute -top-2 -right-2 text-2xl">🇮🇪</div>
               </div>
-              <div>
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Dublin Career <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Mastery</span> Guide
                 </h1>
-                <div className="text-lg text-gray-500 mt-2 font-medium">🚀 Your pathway to Irish job market success</div>
+                <div className="text-base md:text-lg text-gray-500 mt-2 font-medium">🚀 Your pathway to Irish job market success</div>
               </div>
             </div>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed px-4">
               🎯 <strong>Master Dublin&apos;s competitive job market</strong> with insider strategies! From ATS optimization to Irish business culture, 
               this guide reveals the secrets that land interviews at Google Dublin, AIB, Stripe, and Ireland&apos;s top employers.
             </p>
@@ -623,41 +623,41 @@ const DublinFAQPage: React.FC = () => {
                   >
                     <button
                       onClick={() => toggleItem(item.id)}
-                      className="w-full px-8 py-8 text-left flex justify-between items-start hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50 transition-all duration-300"
+                      className="w-full px-4 md:px-8 py-6 md:py-8 text-left flex justify-between items-start hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50 transition-all duration-300"
                     >
-                      <div className="flex items-start">
-                        <span className={`bg-gradient-to-r ${gradientColors[index % gradientColors.length]} text-white text-sm font-bold px-4 py-2 rounded-full mr-6 mt-1 flex-shrink-0 shadow-lg`}>
+                      <div className="flex items-start flex-1 min-w-0">
+                        <span className={`bg-gradient-to-r ${gradientColors[index % gradientColors.length]} text-white text-xs md:text-sm font-bold px-3 md:px-4 py-2 rounded-full mr-3 md:mr-6 mt-1 flex-shrink-0 shadow-lg`}>
                           {index + 1}
                         </span>
-                        <div>
-                          <h3 className="text-xl font-bold text-gray-900 leading-7 mb-2">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-6 md:leading-7 mb-2 pr-2">
                             {item.question}
                           </h3>
-                          <div className="text-sm text-gray-500 font-medium">
+                          <div className="text-xs md:text-sm text-gray-500 font-medium">
                             {isOpen ? '📖 Reading...' : '🚀 Click to unlock insider knowledge'}
                           </div>
                         </div>
                       </div>
-                      <div className="ml-4 flex-shrink-0">
-                        <div className={`p-2 rounded-full transition-all duration-300 ${isOpen ? 'bg-primary-100 text-primary-600' : 'bg-gray-100 text-gray-500'}`}>
+                      <div className="ml-2 md:ml-4 flex-shrink-0">
+                        <div className={`p-1.5 md:p-2 rounded-full transition-all duration-300 ${isOpen ? 'bg-primary-100 text-primary-600' : 'bg-gray-100 text-gray-500'}`}>
                           {isOpen ? (
-                            <ChevronUp className="w-6 h-6" />
+                            <ChevronUp className="w-5 h-5 md:w-6 md:h-6" />
                           ) : (
-                            <ChevronDown className="w-6 h-6" />
+                            <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                           )}
                         </div>
                       </div>
                     </button>
                     
                     {isOpen && (
-                      <div className="px-8 pb-8">
-                        <div className="pl-20">
-                          <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border-l-4 border-primary-400">
+                      <div className="px-4 md:px-8 pb-6 md:pb-8">
+                        <div className="pl-0 md:pl-20">
+                          <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-4 md:p-6 border-l-4 border-primary-400">
                             <div 
-                              className="prose prose-lg prose-gray max-w-none text-gray-700 leading-relaxed"
+                              className="prose prose-sm md:prose-lg prose-gray max-w-none text-gray-700 leading-relaxed"
                               dangerouslySetInnerHTML={{ __html: item.answer }}
                             />
-                            <div className="mt-6 text-xs text-gray-500 font-medium flex items-center">
+                            <div className="mt-4 md:mt-6 text-xs text-gray-500 font-medium flex items-center">
                               <span className="mr-2">💡</span>
                               Expert insights for Dublin job market success
                             </div>

@@ -19,8 +19,8 @@ const HomePage: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
-                <Sparkles className="h-8 w-8 text-primary-600 mr-2" />
-                <span className="text-xl font-bold text-gray-900">CVGenius</span>
+                <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 mr-2" />
+                <span className="text-lg sm:text-xl font-bold text-gray-900">CVGenius</span>
               </div>
               
               <nav className="hidden md:flex space-x-8">
@@ -34,6 +34,13 @@ const HomePage: React.FC = () => {
                   FAQ
                 </Link>
               </nav>
+              
+              {/* Mobile menu button - placeholder for future implementation */}
+              <button className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
             </div>
           </div>
         </header>
@@ -41,20 +48,20 @@ const HomePage: React.FC = () => {
         {/* Hero Section */}
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center mb-8">
-              <div className="relative">
-                <Sparkles className="w-20 h-20 text-primary-600 mr-6 animate-pulse" />
-                <div className="absolute -top-2 -right-2 text-3xl">🤖</div>
+            <div className="flex flex-col md:flex-row items-center justify-center mb-8">
+              <div className="relative mb-4 md:mb-0 md:mr-6 flex-shrink-0">
+                <Sparkles className="w-16 md:w-20 h-16 md:h-20 text-primary-600 animate-pulse" />
+                <div className="absolute -top-2 -right-2 text-2xl md:text-3xl">🤖</div>
               </div>
-              <div>
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Create <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">ATS-Friendly</span> CVs with AI
                 </h1>
-                <div className="text-lg text-gray-500 mt-2 font-medium">🚀 Your pathway to job success in Ireland & Europe</div>
+                <div className="text-base md:text-lg text-gray-500 mt-2 font-medium">🚀 Your pathway to job success in Ireland & Europe</div>
               </div>
             </div>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed px-4">
               🎯 <strong>Build professional CVs from scratch or optimize existing ones</strong> for specific job applications. 
               Powered by AI, designed for the Irish & European job market.
             </p>
@@ -72,17 +79,17 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             
-            {/* Main CTA Buttons */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-16">
+            {/* Action Cards */}
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12">
               {/* Creator Flow */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden transform transition-all duration-300 hover:border-primary-200 hover:shadow-2xl hover:scale-[1.02] group">
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   <div className="mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-blue-200 transition-all duration-300 shadow-lg">
-                      <PlusCircle className="w-10 h-10 text-primary-600" />
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-100 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-blue-200 transition-all duration-300 shadow-lg">
+                      <PlusCircle className="w-8 h-8 sm:w-10 sm:h-10 text-primary-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">✨ Create New CV</h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">✨ Create New CV</h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       🚀 Build a professional CV from scratch with our AI-powered guided form. Perfect for career changes or first-time CV creation.
                     </p>
                   </div>
@@ -99,13 +106,13 @@ const HomePage: React.FC = () => {
               
               {/* Updater Flow */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden transform transition-all duration-300 hover:border-secondary-200 hover:shadow-2xl hover:scale-[1.02] group">
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   <div className="mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-secondary-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-secondary-200 group-hover:to-emerald-200 transition-all duration-300 shadow-lg">
-                      <Upload className="w-10 h-10 text-secondary-600" />
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-100 to-secondary-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-secondary-200 group-hover:to-emerald-200 transition-all duration-300 shadow-lg">
+                      <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-secondary-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">🔄 Update Existing CV</h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🔄 Update Existing CV</h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       ⚡ Upload your current CV and optimize it for a specific job description. Get instant AI-powered improvements.
                     </p>
                   </div>
@@ -122,22 +129,22 @@ const HomePage: React.FC = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-lg border border-green-200 transform hover:scale-105 transition-transform">
-                <Shield className="w-10 h-10 text-green-600 mx-auto mb-4" />
-                <div className="text-3xl font-bold text-green-900 mb-1 text-center">100%</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 sm:p-6 shadow-lg border border-green-200 transform hover:scale-105 transition-transform">
+                <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-green-600 mx-auto mb-4" />
+                <div className="text-2xl sm:text-3xl font-bold text-green-900 mb-1 text-center">100%</div>
                 <div className="text-sm text-green-700 font-medium text-center">Privacy Protected</div>
                 <div className="text-xs text-green-600 mt-2 text-center">🔒 No data stored</div>
               </div>
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-lg border border-blue-200 transform hover:scale-105 transition-transform">
-                <Zap className="w-10 h-10 text-blue-600 mx-auto mb-4" />
-                <div className="text-3xl font-bold text-blue-900 mb-1 text-center">&lt;30s</div>
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 sm:p-6 shadow-lg border border-blue-200 transform hover:scale-105 transition-transform">
+                <Zap className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 mx-auto mb-4" />
+                <div className="text-2xl sm:text-3xl font-bold text-blue-900 mb-1 text-center">&lt;30s</div>
                 <div className="text-sm text-blue-700 font-medium text-center">Generation Time</div>
                 <div className="text-xs text-blue-600 mt-2 text-center">⚡ Lightning fast</div>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 shadow-lg border border-purple-200 transform hover:scale-105 transition-transform">
-                <Globe className="w-10 h-10 text-purple-600 mx-auto mb-4" />
-                <div className="text-3xl font-bold text-purple-900 mb-1 text-center">EU</div>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 sm:p-6 shadow-lg border border-purple-200 transform hover:scale-105 transition-transform">
+                <Globe className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600 mx-auto mb-4" />
+                <div className="text-2xl sm:text-3xl font-bold text-purple-900 mb-1 text-center">EU</div>
                 <div className="text-sm text-purple-700 font-medium text-center">Market Ready</div>
                 <div className="text-xs text-purple-600 mt-2 text-center">🇮🇪 Ireland focused</div>
               </div>
@@ -146,52 +153,51 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-20 bg-white">
+        <section id="features" className="py-16 sm:py-20 bg-gradient-to-br from-white via-primary-50 to-secondary-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-16">
               <div className="flex items-center justify-center mb-6">
-                <span className="text-4xl mr-3">✨</span>
-                <h2 className="text-4xl font-bold text-gray-900">
+                <span className="text-3xl sm:text-4xl mr-3">✨</span>
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
                   Why Choose <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">CVGenius</span>?
                 </h2>
               </div>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                🚀 Our AI-powered platform combines cutting-edge technology with deep understanding 
-                of the Irish and European job markets.
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+                🚀 Built for the Irish & European job market
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-primary-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-blue-200 transition-all duration-300 shadow-lg">
-                  <Sparkles className="w-10 h-10 text-primary-600" />
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-primary-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-blue-200 transition-all duration-300 shadow-lg">
+                  <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-primary-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">🤖 AI-Powered Content</h3>
-                <p className="text-gray-600 text-center leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">🤖 AI-Powered Content</h3>
+                <p className="text-sm sm:text-base text-gray-600 text-center leading-relaxed">
                   Advanced AI transforms your experience into compelling, professional content 
                   that stands out to recruiters and passes ATS systems effortlessly.
                 </p>
               </div>
               
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-green-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-green-200 group-hover:to-emerald-200 transition-all duration-300 shadow-lg">
-                  <Shield className="w-10 h-10 text-green-600" />
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-green-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-green-200 group-hover:to-emerald-200 transition-all duration-300 shadow-lg">
+                  <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">🔒 Privacy First</h3>
-                <p className="text-gray-600 text-center leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">🔒 Privacy First</h3>
+                <p className="text-sm sm:text-base text-gray-600 text-center leading-relaxed">
                   Your data is never stored on our servers. Everything is processed securely 
                   and deleted immediately after generation for complete peace of mind.
                 </p>
               </div>
               
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-blue-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-blue-200 group-hover:to-cyan-200 transition-all duration-300 shadow-lg">
-                  <Zap className="w-10 h-10 text-blue-600" />
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-purple-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-purple-200 group-hover:to-indigo-200 transition-all duration-300 shadow-lg">
+                  <Zap className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">⚡ Lightning Fast</h3>
-                <p className="text-gray-600 text-center leading-relaxed">
-                  Get your professional CV and cover letter in under 30 seconds. 
-                  No lengthy waits or complicated processes - just instant results.
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">⚡ Lightning Fast</h3>
+                <p className="text-sm sm:text-base text-gray-600 text-center leading-relaxed">
+                  Generate professional CVs and cover letters in under 30 seconds. 
+                  No lengthy processes, no waiting - just instant, high-quality results.
                 </p>
               </div>
             </div>
@@ -199,51 +205,51 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+        <section id="how-it-works" className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-16">
               <div className="flex items-center justify-center mb-6">
-                <span className="text-4xl mr-3">🚀</span>
-                <h2 className="text-4xl font-bold text-gray-900">
+                <span className="text-3xl sm:text-4xl mr-3">🚀</span>
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
                   How It <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Works</span>
                 </h2>
               </div>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
                 🎯 Three simple steps to your perfect CV
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-primary-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary-600 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg group-hover:from-primary-700 group-hover:to-blue-700 transition-all duration-300">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-primary-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary-600 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-xl sm:text-2xl font-bold shadow-lg group-hover:from-primary-700 group-hover:to-blue-700 transition-all duration-300">
                   1
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">🎯 Choose Your Path</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">🎯 Choose Your Path</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   Either create a new CV from scratch using our AI-powered guided form, 
                   or upload your existing CV for instant optimization.
                 </p>
               </div>
               
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-secondary-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-secondary-600 to-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg group-hover:from-secondary-700 group-hover:to-emerald-700 transition-all duration-300">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-emerald-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-600 to-teal-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-xl sm:text-2xl font-bold shadow-lg group-hover:from-emerald-700 group-hover:to-teal-700 transition-all duration-300">
                   2
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">✨ AI Magic Happens</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Our advanced AI analyzes your information and the target job description 
-                  to create compelling, ATS-optimized professional content.
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">📝 Provide Details</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  Share your experience, skills, and the job description you're targeting. 
+                  Our AI analyzes everything to create the perfect match.
                 </p>
               </div>
               
-              <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:border-purple-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg group-hover:from-purple-700 group-hover:to-pink-700 transition-all duration-300">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-gray-100 hover:border-purple-200 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] group text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-xl sm:text-2xl font-bold shadow-lg group-hover:from-purple-700 group-hover:to-indigo-700 transition-all duration-300">
                   3
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">📥 Download & Apply</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Receive your professional CV and tailored cover letter as PDF files, 
-                  ready for immediate use in your job applications across Ireland & Europe.
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">⬇️ Download & Apply</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  Get your professional CV and cover letter instantly. 
+                  Ready-to-use documents formatted for ATS systems and Irish employers.
                 </p>
               </div>
             </div>

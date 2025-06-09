@@ -75,7 +75,7 @@ body {
 
 /* Card styles */
 .card {
-  @apply bg-white rounded-xl shadow-soft border border-gray-100;
+  @apply bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden;
 }
 
 .card-header {
@@ -131,7 +131,7 @@ body {
 
 /* File upload styles */
 .dropzone {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center transition-colors duration-200;
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center transition-colors duration-200;
 }
 
 .dropzone-active {
@@ -140,4 +140,43 @@ body {
 
 .dropzone-error {
   @apply border-red-500 bg-red-50;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  .dropzone {
+    @apply p-4;
+  }
+  
+  /* Ensure proper touch targets on mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text sizing on mobile */
+  .form-input {
+    @apply text-base; /* Prevents zoom on iOS */
+  }
+}
+
+/* Better text wrapping and overflow handling */
+.text-wrap-mobile {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Enhanced card styles for mobile */
+.card {
+  @apply bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden;
+}
+
+.card-mobile-padding {
+  @apply p-3 sm:p-4 md:p-6;
+}
+
+/* Touch-friendly interactive elements */
+.touch-target {
+  @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
 }
