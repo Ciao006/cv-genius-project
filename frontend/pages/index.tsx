@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
                 <Sparkles className="w-16 md:w-20 h-16 md:h-20 text-primary-600 animate-pulse" />
                 <div className="absolute -top-2 -right-2 text-2xl md:text-3xl">🤖</div>
               </div>
-              <div className="text-center md:text-left">
+              <div className="text-center">
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Create <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">ATS-Friendly</span> CVs with AI
                 </h1>

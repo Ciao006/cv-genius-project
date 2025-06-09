@@ -551,7 +551,7 @@ const DublinFAQPage: React.FC = () => {
                 <Globe className="w-16 h-16 text-primary-600 animate-pulse" />
                 <div className="absolute -top-2 -right-2 text-2xl">🇮🇪</div>
               </div>
-              <div className="text-center md:text-left">
+              <div className="text-center">
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Dublin Career <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Mastery</span> Guide
                 </h1>
