@@ -1,0 +1,17 @@
+{
+  "name": "cvgenius",
+  "version": 2,
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-449239631634.europe-west1.run.app"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://cvgenius-backend-449239631634.europe-west1.run.app"
+    }
+  },
+  "functions": {
+    "app/**": {
+      "maxDuration": 30
+    }
+  }
+} 

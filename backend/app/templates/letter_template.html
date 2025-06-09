@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ personal_details.full_name }} - Cover Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            font-size: 11pt;
+        }
+        
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background: white;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        .sender-info {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .name {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        
+        .contact-info {
+            font-size: 10pt;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        
+        .date {
+            text-align: right;
+            font-size: 10pt;
+            color: #718096;
+            margin-bottom: 30px;
+        }
+        
+        .recipient {
+            margin-bottom: 30px;
+            font-size: 10pt;
+            color: #4a5568;
+        }
+        
+        .salutation {
+            font-size: 11pt;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        .letter-body {
+            font-size: 11pt;
+            line-height: 1.8;
+            color: #2d3748;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+        
+        .letter-body p {
+            margin-bottom: 15px;
+        }
+        
+        .closing {
+            margin-bottom: 40px;
+        }
+        
+        .closing-phrase {
+            font-size: 11pt;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .container {
+                padding: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with sender info -->
+        <div class="header">
+            <div class="sender-info">
+                <div class="name">{{ personal_details.full_name }}</div>
+                <div class="contact-info">
+                    {{ personal_details.email }}<br>
+                    {{ personal_details.phone }}<br>
+                    {% if personal_details.location %}{{ personal_details.location }}<br>{% endif %}
+                    {% if personal_details.linkedin_url %}{{ personal_details.linkedin_url }}{% endif %}
+                </div>
+            </div>
+            
+            <div class="date">
+                {{ generation_date or "Date" }}
+            </div>
+        </div>
+
+        <!-- Recipient -->
+        <div class="recipient">
+            Hiring Manager<br>
+            {{ company_name or "[Company Name]" }}<br>
+            {% if include_company_address and company_address %}
+            {{ company_address | replace('\n', '<br>') | safe }}
+            {% elif include_company_address %}
+            [Company Address]
+            {% endif %}
+        </div>
+
+        <!-- Salutation -->
+        <div class="salutation">
+            {% if company_name and company_name != "[Company Name]" %}
+            Dear {{ company_name }} Hiring Team,
+            {% else %}
+            Dear Hiring Manager,
+            {% endif %}
+        </div>
+
+        <!-- Letter Body -->
+        <div class="letter-body">
+            {% set cleaned_body = cover_letter_body | replace('Sincerely,', '') | replace('Dear Hiring Manager,', '') | replace('Dear Hiring Team,', '') | replace('Best regards,', '') | replace('Kind regards,', '') %}
+            {% set paragraphs = cleaned_body.split('\n\n') %}
+            {% for paragraph in paragraphs %}
+                {% set clean_paragraph = paragraph.strip() %}
+                {% if clean_paragraph and not clean_paragraph.lower().startswith('sincerely') and not clean_paragraph.lower().startswith('best regards') and not clean_paragraph.lower().startswith('kind regards') and not clean_paragraph.lower().startswith('dear') %}
+                    <p>{{ clean_paragraph }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Closing -->
+        <div class="closing">
+            <div class="closing-phrase">
+                Sincerely,
+            </div>
+            <div class="signature">
+                {{ personal_details.full_name }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

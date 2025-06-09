@@ -1,0 +1,28 @@
+{
+  "name": "cvgenius",
+  "version": "1.0.0",
+  "description": "AI-powered CV and cover letter generator for the Irish job market",
+  "scripts": {
+    "dev": "./start-local.sh",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "build": "cd frontend && npm run build",
+    "test": "cd frontend && npm test && cd ../backend && pytest",
+    "lint": "cd frontend && npm run lint",
+    "deploy:frontend": "cd frontend && npx vercel --prod",
+    "deploy:backend": "cd backend && gcloud run deploy cvgenius-backend --source . --platform managed --region europe-west1 --allow-unauthenticated",
+    "deploy:full": "npm run deploy:backend && npm run deploy:frontend",
+    "status": "echo 'Local: http://localhost:3000 | Backend: http://localhost:8000 | Production: https://cvgenius-nine.vercel.app'"
+  },
+  "keywords": ["cv", "resume", "ai", "job", "ireland", "career"],
+  "author": "CVGenius Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cvgenius.git"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "form-data": "^4.0.3"
+  }
+}

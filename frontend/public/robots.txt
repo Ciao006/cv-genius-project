@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cvgenius-nine.vercel.app/sitemap.xml
