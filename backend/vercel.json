@@ -1,0 +1,29 @@
+{
+  "name": "cvgenius-backend",
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
+  "env": {
+    "GEMINI_API_KEY": "@gemini-api-key",
+    "SECRET_KEY": "@secret-key",
+    "DATABASE_URL": "@database-url",
+    "ALLOWED_ORIGINS": "@allowed-origins",
+    "DEBUG": "false"
+  },
+  "regions": ["iad1"],
+  "functions": {
+    "main.py": {
+      "maxDuration": 60
+    }
+  }
+} 
