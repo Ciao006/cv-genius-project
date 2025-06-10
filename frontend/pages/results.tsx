@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Button from '@/components/ui/Button';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import CoverLetterEditor from '@/components/editor/CoverLetterEditor';
+import CVEditor from '@/components/editor/CVEditor';
+// import CVEditorEnhanced from '@/components/editor/CVEditorEnhanced';
 import type { CoverLetterData } from '@/components/editor/CoverLetterEditor';
 import { downloadPDF, cvAPI } from '@/utils/api';
 import safeStorage from '@/utils/storage';
@@ -57,7 +59,9 @@ const ResultsPage = () => {
   const router = useRouter();
   const [resultsData, setResultsData] = useState<ResultsData | null>(null);
   const [showEditor, setShowEditor] = useState(false);
+  const [showCVEditor, setShowCVEditor] = useState(false);
   const [isRegenerating, setIsRegenerating] = useState(false);
+  // const [useEnhancedEditor] = useState(false); // TODO: Add toggle for enhanced editor
 
   useEffect(() => {
     // Get data from session storage using safe storage utility
@@ -92,6 +96,10 @@ const ResultsPage = () => {
 
   const handleEditCoverLetter = () => {
     setShowEditor(true);
+  };
+
+  const handleEditCV = () => {
+    setShowCVEditor(true);
   };
 
   const handleRegenerateCoverLetter = async () => {
@@ -149,8 +157,36 @@ const ResultsPage = () => {
     }
   };
 
+  const handleSaveCV = async (updatedData: any) => {
+    try {
+      // Call API to generate new PDF with updated CV data
+      const pdfResponse = await cvAPI.generateCVPDF(updatedData);
+      
+      // Update the results data with new PDF
+      setResultsData(prev => prev ? {
+        ...prev,
+        cvPdf: pdfResponse.cv_pdf_base64,
+        filenameCV: pdfResponse.filename_cv,
+        cvData: {
+          ...prev.cvData,
+          ...updatedData
+        }
+      } : null);
+      
+      setShowCVEditor(false);
+      
+      // Show success message
+      alert('CV updated successfully!');
+      
+    } catch (error) {
+      console.error('Error generating updated CV PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
+  };
+
   const handleCancelEdit = () => {
     setShowEditor(false);
+    setShowCVEditor(false);
   };
 
   const handleStartOver = () => {
@@ -189,6 +225,24 @@ const ResultsPage = () => {
           onCancel={handleCancelEdit}
           onRegenerate={handleRegenerateCoverLetter}
           isRegenerating={isRegenerating}
+        />
+      </>
+    );
+  }
+
+  if (showCVEditor) {
+    return (
+      <>
+        <Head>
+          <title>Edit CV - CVGenius</title>
+          <meta name="description" content="Edit and customize your AI-generated CV" />
+        </Head>
+        <CVEditor
+          initialData={resultsData.cvData}
+          originalPdfBase64={resultsData.cvPdf}
+          originalFilename={resultsData.filenameCV}
+          onSave={handleSaveCV}
+          onBack={() => setShowCVEditor(false)}
         />
       </>
     );
@@ -236,12 +290,21 @@ const ResultsPage = () => {
                     <div className="font-medium">{resultsData.filenameCV}</div>
                   </div>
                   
-                  <Button 
-                    onClick={handleDownloadCV}
-                    className="w-full bg-blue-600 hover:bg-blue-700"
-                  >
-                    Download CV
-                  </Button>
+                  <div className="space-y-2">
+                    <Button 
+                      onClick={handleEditCV}
+                      variant="outline"
+                      className="w-full border-blue-300 text-blue-700 hover:bg-blue-50"
+                    >
+                      Preview & Edit
+                    </Button>
+                    <Button 
+                      onClick={handleDownloadCV}
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                    >
+                      Download CV
+                    </Button>
+                  </div>
                 </div>
               </div>
 

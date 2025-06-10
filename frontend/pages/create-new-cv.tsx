@@ -82,6 +82,26 @@ const CreateNewCVPage: React.FC = () => {
         job_description: jobDescriptionData
       };
 
+      // Debug logging to see what's being sent
+      console.log('Form data being sent to API:', JSON.stringify(formData, null, 2));
+      
+      // Validate required fields before sending
+      if (!personalDetails.full_name || !personalDetails.email || !personalDetails.phone) {
+        throw new Error('Personal details are incomplete');
+      }
+      
+      if (workExperience.length === 0) {
+        throw new Error('At least one work experience entry is required');
+      }
+      
+      if (education.length === 0) {
+        throw new Error('At least one education entry is required');
+      }
+      
+      if (!skillsData || skillsData.trim().length < 10) {
+        throw new Error('Skills section must be at least 10 characters');
+      }
+
       const response = await cvAPI.generateFromForm(formData);
       
       // Store results in session storage and redirect to results page

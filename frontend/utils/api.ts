@@ -61,13 +61,20 @@ api.interceptors.response.use(
     // Handle different error types
     if (error.response) {
       // Server responded with error status
-      const errorMessage = error.response.data?.error || error.response.data?.detail || 'Server error occurred';
+      console.error('API Error Response:', {
+        status: error.response.status,
+        data: error.response.data,
+        headers: error.response.headers
+      });
+      const errorMessage = error.response.data?.error || error.response.data?.detail || `Server error (${error.response.status})`;
       throw new Error(errorMessage);
     } else if (error.request) {
       // Request was made but no response received
+      console.error('No response from server:', error.request);
       throw new Error('No response from server. Please check your connection.');
     } else {
       // Something else happened
+      console.error('Request setup error:', error.message);
       throw new Error(error.message || 'An unexpected error occurred');
     }
   }
