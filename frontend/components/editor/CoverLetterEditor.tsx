@@ -143,7 +143,7 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="p-2 bg-white rounded border">{editableData.personal_details.email}</p>
+                  <p className="p-2 bg-white rounded border break-words overflow-hidden">{editableData.personal_details.email}</p>
                 )}
               </div>
               
@@ -313,11 +313,11 @@ export const CoverLetterEditor: React.FC<CoverLetterEditorProps> = ({
                 {editableData.personal_details.full_name}
               </div>
               <div className="text-gray-600 text-sm space-y-1">
-                <div className="break-all">{editableData.personal_details.email}</div>
+                <div className="break-words overflow-hidden">{editableData.personal_details.email}</div>
                 <div>{editableData.personal_details.phone}</div>
                 <div>{editableData.personal_details.location}</div>
                 {editableData.personal_details.linkedin_url && (
-                  <div className="break-all">{editableData.personal_details.linkedin_url}</div>
+                  <div className="break-words overflow-hidden">{editableData.personal_details.linkedin_url}</div>
                 )}
               </div>
               
