@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Lightbulb, Target, Plus, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Lightbulb, Target, Plus, X, ChevronDown, ChevronUp, Type } from 'lucide-react';
 import Textarea from '@/components/ui/Textarea';
 import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 interface Step4Props {
   initialData?: {
@@ -40,6 +41,7 @@ const Step4_Skills: React.FC<Step4Props> = ({
 
   const [selectedSkills, setSelectedSkills] = useState<string[]>(initialData?.skills ? initialData.skills.split(', ') : []);
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['Programming Languages']);
+  const [customSkillInput, setCustomSkillInput] = useState<string>('');
 
   const skillCategories = {
     "Programming Languages": [
@@ -111,7 +113,7 @@ const Step4_Skills: React.FC<Step4Props> = ({
       setSelectedSkills(newSkills);
       // Update form value
       const skillsString = newSkills.join(', ');
-      control._formValues.skills = skillsString;
+      setValue('skills', skillsString);
     }
   };
 
@@ -120,7 +122,22 @@ const Step4_Skills: React.FC<Step4Props> = ({
     setSelectedSkills(newSkills);
     // Update form value
     const skillsString = newSkills.join(', ');
-    control._formValues.skills = skillsString;
+    setValue('skills', skillsString);
+  };
+
+  const addCustomSkill = () => {
+    const skill = customSkillInput.trim();
+    if (skill && !selectedSkills.includes(skill)) {
+      addSkill(skill);
+      setCustomSkillInput('');
+    }
+  };
+
+  const handleCustomSkillKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addCustomSkill();
+    }
   };
 
   const jobTemplates = [
@@ -206,6 +223,38 @@ const Step4_Skills: React.FC<Step4Props> = ({
             <h3 className="text-lg font-semibold text-gray-900">Your Skills</h3>
           </div>
 
+          {/* Manual Skill Addition Section */}
+          <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center mb-3">
+              <Type className="w-4 h-4 text-gray-600 mr-2" />
+              <h4 className="text-sm font-medium text-gray-900">Add Custom Skills</h4>
+            </div>
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <Input
+                  value={customSkillInput}
+                  onChange={(e) => setCustomSkillInput(e.target.value)}
+                  onKeyPress={handleCustomSkillKeyPress}
+                  placeholder="Type a skill name (e.g., React, Project Management, Public Speaking...)"
+                  className="w-full"
+                />
+              </div>
+              <Button
+                type="button"
+                onClick={addCustomSkill}
+                disabled={!customSkillInput.trim() || selectedSkills.includes(customSkillInput.trim())}
+                variant="outline"
+                className="whitespace-nowrap"
+              >
+                <Plus className="w-4 h-4 mr-1" />
+                Add Skill
+              </Button>
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              Can't find a skill in our categories? Add it manually here!
+            </p>
+          </div>
+
           {/* Selected Skills Display */}
           {selectedSkills.length > 0 && (
             <div className="mb-6">
@@ -232,7 +281,7 @@ const Step4_Skills: React.FC<Step4Props> = ({
 
           {/* Skill Categories */}
           <div className="space-y-4">
-            <h4 className="text-sm font-medium text-gray-900">Choose from categories below or add custom skills:</h4>
+            <h4 className="text-sm font-medium text-gray-900">Choose from skill categories:</h4>
             {Object.entries(skillCategories).map(([category, skills]) => (
               <div key={category} className="border border-gray-200 rounded-lg">
                 <button
@@ -282,13 +331,23 @@ const Step4_Skills: React.FC<Step4Props> = ({
             ))}
           </div>
 
-          {/* Custom Skills Input */}
+          {/* Custom Skills Input - Editable textarea */}
           <Controller
             name="skills"
             control={control}
             rules={{
-              required: selectedSkills.length === 0 ? 'Please select skills or add custom skills' : false,
-              validate: () => selectedSkills.length > 0 || 'Please select at least one skill'
+              required: 'Skills are required',
+              minLength: {
+                value: 10,
+                message: 'Skills must be at least 10 characters'
+              },
+              validate: (value) => {
+                const trimmedValue = value?.trim() || '';
+                if (trimmedValue.length < 10) {
+                  return 'Skills must be at least 10 characters';
+                }
+                return selectedSkills.length > 0 || trimmedValue.length >= 10 || 'Please add at least one skill';
+              }
             }}
             render={({ field }) => (
               <div className="mt-6">
@@ -300,11 +359,11 @@ const Step4_Skills: React.FC<Step4Props> = ({
                     setSelectedSkills(skills);
                     field.onChange(e.target.value);
                   }}
-                  label="Selected Skills (Editable)"
+                  label="All Selected Skills (Editable)"
                   placeholder="Your selected skills will appear here, or type custom skills separated by commas..."
                   error={errors.skills?.message}
                   rows={4}
-                  helpText="You can edit this list directly or use the categories above to add skills"
+                  helpText="You can edit this list directly, use the categories above, or add custom skills using the input field"
                 />
               </div>
             )}
