@@ -4,14 +4,16 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://cvgenius-nine.vercel.app)
 [![Backend API](https://img.shields.io/badge/API-Documentation-blue?style=for-the-badge)](https://cvgenius-backend-2fm63lpf4q-ew.a.run.app/docs)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🌟 Features
 
-### ✨ **Intelligent CV Creation**
-- **AI-Powered Generation**: Uses Google Gemini AI trained on Dublin CV standards
+### ✨ **AI-Powered Content Generation**
+- **Google Gemini AI Integration**: Advanced content optimization and enhancement
 - **ATS Optimization**: Formatted for Applicant Tracking Systems used by Irish employers
-- **Dual Workflows**: Create from scratch or update existing CVs
-- **Professional Templates**: Clean, Dublin-compliant formatting
+- **Grammar & Clarity Analysis**: Intelligent content improvement suggestions
+- **Industry Keywords**: 500+ keywords across multiple industries
+- **Impact-Focused Writing**: Transform descriptions into achievement statements
 
 ### 🇮🇪 **Dublin/Irish Market Optimized**
 - **Irish CV Standards**: 1-2 page limit, no photos, professional formatting
@@ -19,17 +21,28 @@
 - **Business Culture**: Professional tone matching Irish workplace expectations
 - **Compliance**: Follows Irish employment and GDPR regulations
 
-### 📄 **Document Generation**
+### 📄 **Comprehensive Document Generation**
 - **PDF Generation**: High-quality, print-ready CV and cover letters
 - **Cover Letter AI**: Automatically generates tailored cover letters
+- **Multiple Templates**: Professional, Executive, Creative, Academic designs
 - **File Support**: Upload existing CVs (PDF/DOCX) for enhancement
-- **Template System**: Professional, ATS-friendly design
+- **Multi-Format Export**: PDF, DOCX, TXT, HTML formats
 
-### 🔧 **Technical Excellence**
-- **Modern Stack**: Next.js frontend, FastAPI backend
-- **Cloud Native**: Deployed on Vercel and Google Cloud Run
-- **Type Safety**: Full TypeScript implementation
-- **Performance**: Optimized for speed and reliability
+### 📱 **Mobile-First Experience**
+- **Step-by-Step Mobile Editor**: Touch-optimized editing experience
+- **Responsive Preview**: Mobile-friendly CV preview and real-time updates
+- **Auto-Save Functionality**: Never lose your work
+- **Offline Capability**: Work without internet connection
+
+### 📊 **Advanced Analytics & Optimization**
+- **ATS Scoring System**: Comprehensive 0-100 compatibility scoring
+- **Performance Tracking**: Monitor application success rates
+- **Job Description Matching**: Optimize for specific job postings
+- **Industry Benchmarking**: Compare against market standards
+
+### 🚀 **Dual Creation Workflows**
+1. **From Scratch**: Guided step-by-step CV creation with AI assistance
+2. **Update Existing**: Upload and enhance existing CVs with AI optimization
 
 ## 🚀 Live Application
 
@@ -169,7 +182,31 @@ cv_file: [PDF/DOCX file]
 job_description: "target job description"
 ```
 
+### Advanced Features
+- `POST /api/v1/advanced/optimize/content` - AI content optimization
+- `POST /api/v1/advanced/ats/analyze` - ATS compatibility analysis
+- `POST /api/v1/advanced/export/multi-format` - Multi-format export
+
 Full API documentation available at `/docs` endpoint.
+
+## 🎯 Use Cases
+
+### For Job Seekers
+- Create professional CVs with AI assistance
+- Optimize for ATS systems and specific job postings
+- Generate tailored cover letters automatically
+- Track application success and improve over time
+
+### For Career Coaches
+- Help clients with guided CV creation
+- Provide structured feedback and improvements
+- Use analytics to track client success rates
+- Leverage AI-powered content suggestions
+
+### For HR Professionals
+- Understand ATS optimization requirements
+- Benchmark CV quality standards
+- Process and analyze CV formats efficiently
 
 ## 🔒 Security & Privacy
 
@@ -223,6 +260,20 @@ Full API documentation available at `/docs` endpoint.
 ### Getting Help
 - **Issues**: [GitHub Issues](https://github.com/yourusername/cvgenius/issues)
 - **Documentation**: [API Docs](https://cvgenius-backend-2fm63lpf4q-ew.a.run.app/docs)
+
+## 🎯 Roadmap
+
+### Version 2.1 (Coming Soon)
+- [ ] Advanced collaboration features
+- [ ] LinkedIn auto-apply integration
+- [ ] Enhanced AI coaching
+- [ ] Custom branding options
+
+### Version 2.2 (Future)
+- [ ] Multi-language support
+- [ ] Voice-to-text CV creation
+- [ ] Interview preparation tools
+- [ ] Salary negotiation insights
 
 ## 📄 License
 
