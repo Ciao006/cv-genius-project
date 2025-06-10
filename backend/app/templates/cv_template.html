@@ -15,27 +15,27 @@
         
         body {
             font-family: Arial, 'Times New Roman', sans-serif;
-            line-height: 1.6;
+            line-height: 1.4;
             color: #2d3748;
-            font-size: 11pt;
+            font-size: 10pt;
         }
         
         .container {
             max-width: 210mm;
             margin: 0 auto;
-            padding: 20mm;
+            padding: 15mm;
             background: white;
         }
         
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #3182ce;
-            padding-bottom: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #3182ce;
+            padding-bottom: 15px;
         }
         
         .name {
-            font-size: 28pt;
+            font-size: 18pt;
             font-weight: 700;
             color: #1a202c;
             margin-bottom: 8px;
@@ -43,43 +43,50 @@
         
         .contact-info {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
-            gap: 20px;
-            font-size: 10pt;
+            gap: 15px;
+            font-size: 9pt;
             color: #4a5568;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
+        }
+        
+        .contact-item:not(:last-child)::after {
+            content: "•";
+            margin-left: 10px;
+            margin-right: 5px;
+            color: #718096;
         }
         
         .section {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
         
         .section-title {
-            font-size: 14pt;
+            font-size: 12pt;
             font-weight: 600;
             color: #3182ce;
             border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         
         .professional-summary {
-            font-size: 11pt;
-            line-height: 1.7;
+            font-size: 10pt;
+            line-height: 1.5;
             color: #4a5568;
             text-align: justify;
         }
         
         .experience-item, .education-item {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             page-break-inside: avoid;
         }
         
@@ -87,38 +94,39 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         
         .job-title, .degree {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: 600;
             color: #1a202c;
         }
         
         .company, .institution {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: 500;
             color: #3182ce;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         
         .date-location {
             text-align: right;
-            font-size: 10pt;
+            font-size: 9pt;
             color: #718096;
         }
         
         .achievements {
             list-style: none;
-            margin-top: 8px;
+            margin-top: 5px;
         }
         
         .achievements li {
             position: relative;
-            padding-left: 20px;
-            margin-bottom: 5px;
-            line-height: 1.5;
+            padding-left: 15px;
+            margin-bottom: 3px;
+            line-height: 1.4;
+            font-size: 9pt;
         }
         
         .achievements li:before {
@@ -131,34 +139,34 @@
         
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
         }
         
         .skill-category {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .skill-category-title {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: 600;
             color: #2d3748;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             text-transform: capitalize;
         }
         
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 5px;
         }
         
         .skill-item {
             background: #edf2f7;
             color: #2d3748;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 10pt;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 9pt;
             font-weight: 500;
         }
         
@@ -186,25 +194,13 @@
         <div class="header">
             <h1 class="name">{{ personal_details.full_name }}</h1>
             <div class="contact-info">
-                <div class="contact-item">
-                    <span>Email:</span>
-                    <span>{{ personal_details.email }}</span>
-                </div>
-                <div class="contact-item">
-                    <span>Phone:</span>
-                    <span>{{ personal_details.phone }}</span>
-                </div>
+                <div class="contact-item">{{ personal_details.email }}</div>
+                <div class="contact-item">{{ personal_details.phone }}</div>
                 {% if personal_details.location %}
-                <div class="contact-item">
-                    <span>Location:</span>
-                    <span>{{ personal_details.location }}</span>
-                </div>
+                <div class="contact-item">{{ personal_details.location }}</div>
                 {% endif %}
                 {% if personal_details.linkedin_url %}
-                <div class="contact-item">
-                    <span>LinkedIn:</span>
-                    <span>{{ personal_details.linkedin_url }}</span>
-                </div>
+                <div class="contact-item">{{ personal_details.linkedin_url }}</div>
                 {% endif %}
             </div>
         </div>

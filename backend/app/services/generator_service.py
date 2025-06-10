@@ -336,11 +336,13 @@ Instructions:
 9. IMPORTANT: Do not include ANY placeholder text in square brackets like [Platform where you saw the advert] or similar placeholders
 
 Your task is to:
-1. Extract and enhance personal details
+1. Extract and preserve EXACT personal details from CV (especially email address - use EXACTLY what's in the CV)
 2. Create a targeted professional summary
 3. Optimize work experience descriptions with relevant keywords
 4. Highlight relevant skills and achievements
 5. Write a compelling cover letter body (3-4 paragraphs, no salutation or closing)
+
+CRITICAL: For personal_details, use the EXACT email address, phone number, and name found in the original CV. Do NOT change or generate new email addresses.
 
 Output ONLY valid JSON in this exact format:
 {{
@@ -455,6 +457,10 @@ Output ONLY valid JSON in this exact format:
             if "job_title" not in data:
                 data["job_title"] = "the position"
             
+            # Clean placeholder text from cover letter body
+            if "cover_letter_body" in data:
+                data["cover_letter_body"] = self._clean_placeholder_text(data["cover_letter_body"])
+            
             return data
             
         except json.JSONDecodeError as e:
@@ -462,13 +468,40 @@ Output ONLY valid JSON in this exact format:
         except Exception as e:
             raise ValueError(f"Failed to parse AI response: {str(e)}")
     
+    def _clean_placeholder_text(self, text: str) -> str:
+        """Remove placeholder text in square brackets"""
+        import re
+        
+        # Remove placeholder text patterns
+        placeholder_patterns = [
+            r'\[Platform where you saw the advert\]',
+            r'\[platform where you saw the advert\]',
+            r'\[Platform Where You Saw The Advert\]',
+            r'\[Company Name\]',
+            r'\[company name\]',
+            r'\[Job Title\]',
+            r'\[job title\]',
+            r'\[.*?\]',  # Generic catch-all for any text in square brackets
+        ]
+        
+        cleaned_text = text
+        for pattern in placeholder_patterns:
+            cleaned_text = re.sub(pattern, '', cleaned_text, flags=re.IGNORECASE)
+        
+        # Clean up extra spaces and newlines left by removal
+        cleaned_text = re.sub(r'\s+', ' ', cleaned_text)  # Multiple spaces to single space
+        cleaned_text = re.sub(r'\n\s*\n', '\n\n', cleaned_text)  # Clean up paragraph breaks
+        cleaned_text = cleaned_text.strip()
+        
+        return cleaned_text
+    
     async def _generate_pdfs(self, cv_data: Dict[str, Any]) -> tuple[bytes, bytes]:
         """Generate CV and cover letter PDFs"""
         if HTML is None:
             raise Exception("PDF generation library not available. Please install weasyprint")
         try:
-            # Load templates
-            cv_template = self.jinja_env.get_template('cv_template.html')
+            # Load templates (use enhanced template for better formatting)
+            cv_template = self.jinja_env.get_template('cv_template_enhanced.html')
             letter_template = self.jinja_env.get_template('letter_template.html')
             
             # Add current date for cover letter
