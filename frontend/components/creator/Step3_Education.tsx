@@ -43,6 +43,20 @@ const Step3_Education: React.FC<Step3Props> = ({
     const validEducation = data.education.filter(edu => 
       edu.degree.trim() && edu.institution.trim()
     );
+    
+    // Backend requires at least 1 education entry
+    if (validEducation.length === 0) {
+      // Add a default education entry if none exist
+      validEducation.push({
+        degree: 'Not specified',
+        institution: 'Not specified',
+        start_date: '2020',
+        end_date: '2024',
+        grade: '',
+        location: ''
+      });
+    }
+    
     onNext(validEducation);
   };
 

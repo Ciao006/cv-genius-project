@@ -233,8 +233,8 @@ const Step2_Experience: React.FC<Step2Props> = ({
               rules={{
                 required: 'Job description is required',
                 minLength: {
-                  value: 20,
-                  message: 'Description must be at least 20 characters'
+                  value: 10,
+                  message: 'Description must be at least 10 characters'
                 }
               }}
               render={({ field }) => (
