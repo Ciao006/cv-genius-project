@@ -1,7 +1,13 @@
-# Virtual environments
+# Virtual environments - MUST be excluded
 venv/
+venv/*
 env/
+env/*
+.env
+.venv/
+.venv/*
 __pycache__/
+__pycache__/*
 *.pyc
 *.pyo
 *.pyd
@@ -15,24 +21,36 @@ __pycache__/
 
 # Test files
 tests/
+tests/*
 test_*.py
 *_test.py
 
 # Documentation
 *.md
 docs/
+docs/*
 
 # IDE files
 .vscode/
+.vscode/*
 .idea/
+.idea/*
 *.swp
 *.swo
 
 # Version control
 .git/
+.git/*
 .gitignore
 
 # Temporary files
 tmp/
 temp/
-*.tmp 
+*.tmp
+
+# Large directories that should never be deployed
+node_modules/
+node_modules/*
+.pytest_cache/
+.coverage
+*.egg-info/ 
